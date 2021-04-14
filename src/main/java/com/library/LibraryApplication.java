@@ -1,6 +1,5 @@
 package com.library;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.domain.Book;
@@ -24,7 +23,12 @@ public class LibraryApplication {
     CommandLineRunner runner(BookService bookService) {
         return args -> {
             ObjectMapper mapper = new ObjectMapper();
-            JsonNode items = mapper.readTree(new File("src/main/resources/json/books.json")).get("items");
+            JsonNode items;
+            if(args.length == 0) {
+                items = mapper.readTree(new File("src/main/resources/json/books.json")).get("items");
+            }else{
+                items = mapper.readTree(new File(args[0])).get("items");
+            }
             if(items.isArray()){
                 for(final JsonNode item:items){
                     Book book = mapper.treeToValue(item,Book.class);

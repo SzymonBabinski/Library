@@ -1,21 +1,16 @@
 package com.library.service;
 
 import com.library.domain.Book;
-import com.library.repository.BookRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class BookService {
+public interface BookService {
+    void saveAll(List<Book> bookList);
 
-    BookRepository bookRepository;
+    List<Book> findAll();
 
-    BookService(final BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+    Book save(Book book);
 
-    public void saveAll(List<Book> bookList){
-        bookRepository.saveAll(bookList);
-    }
+    Optional<Book> findBookByIsbn(String isbn);
 }
