@@ -1,10 +1,14 @@
 package com.library.domain;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.*;
 
 @Entity
 public class Author {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     public Author(final String name) {

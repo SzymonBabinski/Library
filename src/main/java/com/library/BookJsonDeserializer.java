@@ -67,6 +67,11 @@ public class BookJsonDeserializer extends JsonDeserializer<Book> {
             String description = volumeInfo.get("description").asText();
             book.setDescription(description);
         }
+        //PAGE COUNT
+        if(volumeInfo.has("pageCount")){
+            int pageCount = volumeInfo.get("pageCount").asInt();
+            book.setPageCount(pageCount);
+        }
         //THUMBNAIL
         if(volumeInfo.get("imageLinks").has("thumbnail")){
             String thumbnailUrl = volumeInfo.get("imageLinks").get("thumbnail").asText();
@@ -88,7 +93,6 @@ public class BookJsonDeserializer extends JsonDeserializer<Book> {
             book.setAverageRating(averageRating);
         }
 
-        // TODO: authors and categories
         // AUTHORS
         if(volumeInfo.has("authors")){
             JsonNode authors = volumeInfo.get("authors");

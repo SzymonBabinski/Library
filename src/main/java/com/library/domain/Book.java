@@ -1,16 +1,19 @@
 package com.library.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.library.BookJsonDeserializer;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = BookJsonDeserializer.class)
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Book {
     @Id
     private String isbn;
@@ -18,6 +21,7 @@ public class Book {
     private String subtitle;
     private String publisher;
     private long publishedDate;
+    @Column(length = 10000)
     private String description;
     private int pageCount;
     private String thumbnailUrl;
@@ -25,7 +29,14 @@ public class Book {
     private String previewLink;
     private double averageRating;
 
-    public Book(final String isbn, final String title, final String subtitle, final String publisher, final long publishedDate, final String description, final int pageCount, final String thumbnailUrl, final String language, final String previewLink, final double averageRating) {
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Author> authors;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Category> categories;
+
+
+    public Book(final String isbn, final String title, final String subtitle, final String publisher, final long publishedDate, final String description, final int pageCount, final String thumbnailUrl, final String language, final String previewLink, final double averageRating, final List<Author> authors, final List<Category> categories) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
@@ -37,6 +48,8 @@ public class Book {
         this.language = language;
         this.previewLink = previewLink;
         this.averageRating = averageRating;
+        this.authors = authors;
+        this.categories = categories;
     }
 
     public Book() {
@@ -128,5 +141,21 @@ public class Book {
 
     public void setAverageRating(final double averageRating) {
         this.averageRating = averageRating;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(final List<Author> authors) {
+        this.authors = authors;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(final List<Category> categories) {
+        this.categories = categories;
     }
 }
