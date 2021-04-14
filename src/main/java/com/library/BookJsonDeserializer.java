@@ -5,10 +5,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.library.domain.Author;
 import com.library.domain.Book;
+import com.library.domain.Category;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BookJsonDeserializer extends JsonDeserializer<Book> {
 
@@ -85,6 +89,29 @@ public class BookJsonDeserializer extends JsonDeserializer<Book> {
         }
 
         // TODO: authors and categories
+        // AUTHORS
+        if(volumeInfo.has("authors")){
+            JsonNode authors = volumeInfo.get("authors");
+            List<Author> authorsList = new ArrayList<>();
+            if(authors.isArray()){
+                for(final JsonNode jsonNode:authors){
+                    authorsList.add(new Author(jsonNode.textValue()));
+                }
+            }
+            book.setAuthors(authorsList);
+        }
+
+        //CATEGORIES
+        if(volumeInfo.has("categories")){
+            JsonNode categories = volumeInfo.get("categories");
+            List<Category> categoryList = new ArrayList<>();
+            if(categories.isArray()){
+                for(final JsonNode jsonNode:categories){
+                    categoryList.add(new Category(jsonNode.asText()));
+                }
+            }
+            book.setCategories(categoryList);
+        }
 
         return book;
     }
