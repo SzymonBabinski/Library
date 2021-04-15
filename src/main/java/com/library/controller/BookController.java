@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -17,11 +19,16 @@ public class BookController {
     }
 
     @GetMapping("/books/{isbn}")
-    public ResponseEntity<Book> bookDetails(@PathVariable String isbn){
+    public ResponseEntity<Book> bookDetails(@PathVariable String isbn) {
         return bookService
                 .findBookByIsbn(isbn)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/books/category/{category}")
+    public ResponseEntity<List<Book>> booksByCategory(@PathVariable String category) {
+        return ResponseEntity.ok().body(bookService.findBooksByCategory(category));
     }
 
 

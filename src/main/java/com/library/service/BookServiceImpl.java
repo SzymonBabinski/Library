@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
     BookRepository bookRepository;
 
     BookServiceImpl(final BookRepository bookRepository) {
@@ -21,12 +21,12 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book save(final Book book){
+    public Book save(final Book book) {
         return bookRepository.save(book);
     }
 
     @Override
-    public Optional<Book> findBookByIsbn(String isbn){
+    public Optional<Book> findBookByIsbn(String isbn) {
         return bookRepository.findById(isbn);
     }
 
@@ -34,6 +34,11 @@ public class BookServiceImpl implements BookService{
     @Override
     public List<Book> findAll() {
         return bookRepository.findAll();
+    }
+
+    @Override
+    public List<Book> findBooksByCategory(String category) {
+        return bookRepository.findBooksByCategory(category);
     }
 
 

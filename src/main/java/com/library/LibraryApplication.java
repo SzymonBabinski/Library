@@ -10,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -24,6 +26,7 @@ public class LibraryApplication {
         return args -> {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode items;
+            List<Book> bookList = new ArrayList<>();
             if (args.length == 0) {
                 items = mapper.readTree(new File("src/main/resources/json/books.json")).get("items");
             } else {
@@ -32,9 +35,11 @@ public class LibraryApplication {
             if (items.isArray()) {
                 for (final JsonNode item : items) {
                     Book book = mapper.treeToValue(item, Book.class);
-                    bookService.save(book);
+                    bookList.add(book);
                 }
             }
+
+            bookService.saveAll(bookList);
         };
 
     }

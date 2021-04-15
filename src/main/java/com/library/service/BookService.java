@@ -13,4 +13,6 @@ public interface BookService {
     Book save(Book book);
 
     Optional<Book> findBookByIsbn(String isbn);
+
+    List<Book> findBooksByCategory(String category);
 }
