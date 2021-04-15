@@ -16,24 +16,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void saveAll(final List<Book> bookList) {
-        bookRepository.saveAll(bookList);
-    }
-
-    @Override
-    public Book save(final Book book) {
-        return bookRepository.save(book);
+    public List<Book> saveAll(final List<Book> bookList) {
+        return bookRepository.saveAll(bookList);
     }
 
     @Override
     public Optional<Book> findBookByIsbn(String isbn) {
         return bookRepository.findById(isbn);
-    }
-
-
-    @Override
-    public List<Book> findAll() {
-        return bookRepository.findAll();
     }
 
     @Override
