@@ -1,6 +1,5 @@
 package com.library.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.library.BookJsonDeserializer;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Data
 @Entity
-@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = BookJsonDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Book {
@@ -29,10 +27,12 @@ public class Book {
     private String previewLink;
     private double averageRating;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Author> authors;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<Category> categories;
 
 

@@ -1,14 +1,12 @@
 package com.library.domain;
 
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.*;
 
 @Entity
 public class Author {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
 
     public Author(final String name) {
@@ -27,6 +25,7 @@ public class Author {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return name;
     }

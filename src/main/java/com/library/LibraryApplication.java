@@ -24,16 +24,18 @@ public class LibraryApplication {
         return args -> {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode items;
-            if(args.length == 0) {
+            if (args.length == 0) {
                 items = mapper.readTree(new File("src/main/resources/json/books.json")).get("items");
-            }else{
+            } else {
                 items = mapper.readTree(new File(args[0])).get("items");
             }
-            if(items.isArray()){
-                for(final JsonNode item:items){
-                    Book book = mapper.treeToValue(item,Book.class);
+            if (items.isArray()) {
+                for (final JsonNode item : items) {
+                    Book book = mapper.treeToValue(item, Book.class);
+                    bookService.save(book);
                 }
             }
         };
+
     }
 }
