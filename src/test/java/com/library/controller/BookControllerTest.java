@@ -61,7 +61,7 @@ class BookControllerTest {
     @Test
     public void books_volume_returns_200_and_correct_pageCount() {
         when()
-                .get("/books/volume/{pageCount}", 100).
+                .get("/books/volumes/{pageCount}", 100).
                 then()
                 .statusCode(200)
                 .body("pageCount", greaterThan(100));
@@ -70,7 +70,7 @@ class BookControllerTest {
     @Test
     public void books_volume_returns_404_while_wrong_pageCount() {
         when()
-                .get("/books/volume/{pageCount}", 999999)
+                .get("/books/volumes/{pageCount}", 999999)
                 .then()
                 .statusCode(404);
     }
