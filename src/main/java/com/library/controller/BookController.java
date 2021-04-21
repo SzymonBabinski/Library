@@ -26,10 +26,14 @@ public class BookController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/books/category/{category}")
+    @GetMapping("/books/categories/{category}")
     public ResponseEntity<List<Book>> booksByCategory(@PathVariable String category) {
         return ResponseEntity.ok().body(bookService.findBooksByCategory(category));
     }
 
+    @GetMapping("/authors/ratings")
+    public ResponseEntity<List<Book.AuthorsNameAndAvgRatingOnly>> authorsByRatings() {
+        return ResponseEntity.ok().body(bookService.findAuthorsByRatings());
+    }
 
 }

@@ -30,5 +30,8 @@ public class BookServiceImpl implements BookService {
         return bookRepository.findBooksByCategory(category);
     }
 
+    @Override
+    public List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings() {return bookRepository.findAuthorsByRatings();}
+
 
 }

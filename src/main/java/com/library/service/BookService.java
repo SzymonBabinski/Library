@@ -11,4 +11,6 @@ public interface BookService {
     Optional<Book> findBookByIsbn(String isbn);
 
     List<Book> findBooksByCategory(String category);
+
+    List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings();
 }

@@ -36,7 +36,10 @@ public class Book {
     private List<Category> categories;
 
 
-    public Book(final String isbn, final String title, final String subtitle, final String publisher, final long publishedDate, final String description, final int pageCount, final String thumbnailUrl, final String language, final String previewLink, final double averageRating, final List<Author> authors, final List<Category> categories) {
+    public Book(final String isbn, final String title, final String subtitle, final String publisher,
+                final long publishedDate, final String description, final int pageCount, final String thumbnailUrl,
+                final String language, final String previewLink, final double averageRating,
+                final List<Author> authors, final List<Category> categories) {
         this.isbn = isbn;
         this.title = title;
         this.subtitle = subtitle;
@@ -157,6 +160,12 @@ public class Book {
 
     public void setCategories(final List<Category> categories) {
         this.categories = categories;
+    }
+
+    public interface AuthorsNameAndAvgRatingOnly {
+        Double getAverageRating();
+
+        String getName();
     }
 
 
