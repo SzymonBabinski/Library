@@ -36,7 +36,7 @@ public class BookController {
         return ResponseEntity.ok().body(bookService.findAuthorsByRatings());
     }
 
-    @GetMapping("/books/volume/{pageCount}")
+    @GetMapping("/books/volumes/{pageCount}")
     public ResponseEntity<Book> bookVolume(@PathVariable int pageCount) {
         return bookService
                 .findBookWithPagesGreaterThan(pageCount)
@@ -44,5 +44,9 @@ public class BookController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/books/pages/{pagesPerHour}/hours/{hoursDaily}")
+    public ResponseEntity<List<Book>> bestBooks(@PathVariable int pagesPerHour, @PathVariable int hoursDaily){
+        return ResponseEntity.ok().body(bookService.findBooksByPagesPerHourAndHoursDaily(pagesPerHour,hoursDaily));
+    }
 
 }

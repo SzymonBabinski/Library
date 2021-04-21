@@ -15,4 +15,6 @@ public interface BookService {
     List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings();
 
     Optional<Book> findBookWithPagesGreaterThan(int pageCount);
+
+    List<Book> findBooksByPagesPerHourAndHoursDaily(int pagesPerHour, int hoursDaily);
 }

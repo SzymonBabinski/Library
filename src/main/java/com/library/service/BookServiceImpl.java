@@ -4,8 +4,7 @@ import com.library.domain.Book;
 import com.library.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -31,11 +30,23 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings() {return bookRepository.findAuthorsByRatings();}
+    public List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings() {
+        return bookRepository.findAuthorsByRatings();
+    }
 
     @Override
-    public Optional<Book> findBookWithPagesGreaterThan(int pageCount){
+    public Optional<Book> findBookWithPagesGreaterThan(int pageCount) {
         return bookRepository.findTopBookByPageCountGreaterThan(pageCount);
+    }
+
+    @Override
+    public List<Book> findBooksByPagesPerHourAndHoursDaily(int pagesPerHour, int hoursDaily) {
+        if (hoursDaily > 24) {
+            return new ArrayList<>();
+        }
+        int pagesPerMonth = pagesPerHour * hoursDaily * 30;
+
+        return bookRepository.findBooksByPagesMonthly(pagesPerMonth);
     }
 
 

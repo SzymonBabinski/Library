@@ -21,4 +21,8 @@ public interface BookRepository extends JpaRepository<Book, String> {
 
     Optional<Book> findTopBookByPageCountGreaterThan(int pageCount);
 
+    @Query("select b from Book b " +
+            "where b.pageCount <= :pagesMonthly AND b.pageCount <> 0 ORDER BY b.averageRating DESC")
+    List<Book> findBooksByPagesMonthly(int pagesMonthly);
+
 }
