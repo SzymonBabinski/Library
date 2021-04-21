@@ -1,7 +1,6 @@
 package com.library;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,7 +9,6 @@ import com.library.domain.Book;
 import com.library.domain.Category;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -19,7 +17,7 @@ import java.util.function.Function;
 public class BookJsonDeserializer extends JsonDeserializer<Book> {
 
     @Override
-    public Book deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException{
+    public Book deserialize(final JsonParser p, final DeserializationContext ctxt) throws IOException {
         Book book = new Book();
         JsonNode node = p.getCodec().readTree(p);
         JsonNode volumeInfo = node.get("volumeInfo");
@@ -57,23 +55,17 @@ public class BookJsonDeserializer extends JsonDeserializer<Book> {
         //PUBLISHED DATE
         if (volumeInfo.has("publishedDate")) {
             String publishedDate = volumeInfo.get("publishedDate").textValue();
-            if (publishedDate.length() == 4) {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy");
+            List<SimpleDateFormat> knownPatterns = Arrays.asList(
+                    new SimpleDateFormat("yyyy"),
+                    new SimpleDateFormat("yyyy-MM-dd")
+            );
+
+            for (SimpleDateFormat pattern : knownPatterns) {
                 try {
-                    Date date = dateFormat.parse(publishedDate);
+                    Date date = pattern.parse(publishedDate);
                     long unixTime = date.getTime();
                     book.setPublishedDate(unixTime);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                try {
-                    Date date = dateFormat.parse(publishedDate);
-                    long unixTime = date.getTime();
-                    book.setPublishedDate(unixTime);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                } catch (ParseException ignored) {
                 }
             }
         }
