@@ -2,7 +2,7 @@ package com.library.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.library.BookJsonDeserializer;
+import com.library.parser.BookJsonDeserializer;
 
 import javax.persistence.*;
 import java.util.List;
