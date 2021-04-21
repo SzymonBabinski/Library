@@ -13,4 +13,6 @@ public interface BookService {
     List<Book> findBooksByCategory(String category);
 
     List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings();
+
+    Optional<Book> findBookWithPagesGreaterThan(int pageCount);
 }

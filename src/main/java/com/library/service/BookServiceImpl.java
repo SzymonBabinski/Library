@@ -33,5 +33,10 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings() {return bookRepository.findAuthorsByRatings();}
 
+    @Override
+    public Optional<Book> findBookWithPagesGreaterThan(int pageCount){
+        return bookRepository.findTopBookByPageCountGreaterThan(pageCount);
+    }
+
 
 }

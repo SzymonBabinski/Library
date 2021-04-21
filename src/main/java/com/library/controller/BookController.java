@@ -36,4 +36,13 @@ public class BookController {
         return ResponseEntity.ok().body(bookService.findAuthorsByRatings());
     }
 
+    @GetMapping("/books/volume/{pageCount}")
+    public ResponseEntity<Book> bookVolume(@PathVariable int pageCount) {
+        return bookService
+                .findBookWithPagesGreaterThan(pageCount)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+
 }
