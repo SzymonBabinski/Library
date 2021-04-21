@@ -3,12 +3,10 @@ package com.library.domain;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.library.BookJsonDeserializer;
-import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
 @Entity
 @JsonDeserialize(using = BookJsonDeserializer.class)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
