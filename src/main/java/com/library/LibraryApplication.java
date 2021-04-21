@@ -16,6 +16,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class LibraryApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(LibraryApplication.class, args);
     }
@@ -27,10 +28,12 @@ public class LibraryApplication {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode items;
             List<Book> bookList = new ArrayList<>();
-            if (args.length == 0) {
-                items = mapper.readTree(new File("src/main/resources/json/books.json")).get("items");
+            String dataSource = System.getProperty("datasource");
+            if (dataSource == null) {
+                items = mapper.readTree(getClass().getResourceAsStream("/json/books.json")).get("items");
+
             } else {
-                items = mapper.readTree(new File(args[0])).get("items");
+                items = mapper.readTree(new File(dataSource)).get("items");
             }
             if (items.isArray()) {
                 for (final JsonNode item : items) {
