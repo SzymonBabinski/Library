@@ -1,6 +1,8 @@
 package com.library.service;
 
+import com.library.dao.AuthorsAndAvgRatingOnly;
 import com.library.domain.Book;
+import com.library.domain.Category;
 import com.library.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book.AuthorsNameAndAvgRatingOnly> findAuthorsByRatings() {
+    public List<AuthorsAndAvgRatingOnly> findAuthorsByRatings() {
         return bookRepository.findAuthorsByRatings();
     }
 
@@ -47,6 +49,16 @@ public class BookServiceImpl implements BookService {
         int pagesPerMonth = pagesPerHour * hoursDaily * 30;
 
         return bookRepository.findBooksByPagesMonthly(pagesPerMonth);
+    }
+
+    @Override
+    public List<Category> findAllCategories() {
+        return bookRepository.findAllCategories();
+    }
+
+    @Override
+    public List<Book> findAllBooks() {
+        return bookRepository.findAll();
     }
 
 

@@ -159,12 +159,4 @@ public class Book {
     public void setCategories(final List<Category> categories) {
         this.categories = categories;
     }
-
-    public interface AuthorsNameAndAvgRatingOnly {
-        Double getAverageRating();
-
-        String getName();
-    }
-
-
 }

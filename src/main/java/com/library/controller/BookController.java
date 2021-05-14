@@ -1,6 +1,8 @@
 package com.library.controller;
 
+import com.library.dao.AuthorsAndAvgRatingOnly;
 import com.library.domain.Book;
+import com.library.domain.Category;
 import com.library.service.BookService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +28,23 @@ public class BookController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/books")
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return ResponseEntity.ok().body(bookService.findAllBooks());
+    }
+
     @GetMapping("/books/categories/{category}")
     public ResponseEntity<List<Book>> booksByCategory(@PathVariable String category) {
         return ResponseEntity.ok().body(bookService.findBooksByCategory(category));
     }
 
+    @GetMapping("/books/categories")
+    public ResponseEntity<List<Category>> booksCategories() {
+        return ResponseEntity.ok().body(bookService.findAllCategories());
+    }
+
     @GetMapping("/authors/ratings")
-    public ResponseEntity<List<Book.AuthorsNameAndAvgRatingOnly>> authorsByRatings() {
+    public ResponseEntity<List<AuthorsAndAvgRatingOnly>> authorsByRatings() {
         return ResponseEntity.ok().body(bookService.findAuthorsByRatings());
     }
 
