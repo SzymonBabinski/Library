@@ -24,7 +24,9 @@ e.g. java -Ddatasource=books.json -jar library-0.0.1-SNAPSHOT.jar
 | Endpoint | Description  |
 | ------------- |:-------------:|
 | /books/{isbn}      | allows reading details about book |
+| /books | Lists all books |
 | /books/categories/{category}      |   Lists all books that are assigned to the requested category    |
+| /books/categories | Lists all categories of stored books |
 | /authors/ratings |  Lists all authors and their rating in descending order of the average rating of their books     |
 | /books/volumes/{pageCount} |  Lists first book which number of pages is greater than specified value     |
 | /books/pages/{pagesPerHour}/hours/{hoursDaily} | Lists the best rated books which can be read in a month. |
@@ -34,5 +36,6 @@ e.g. java -Ddatasource=books.json -jar library-0.0.1-SNAPSHOT.jar
   - JUnit4, Mockito, RestAssured
   - h2 Database
   - Jackson
+  - HTML, CSS, JavaScript(jQuery)
   
   

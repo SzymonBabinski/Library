@@ -29,12 +29,13 @@ public class LibraryApplication {
             JsonNode items;
             List<Book> bookList = new ArrayList<>();
             String dataSource = System.getProperty("datasource");
+
             if (dataSource == null) {
                 items = mapper.readTree(getClass().getResourceAsStream("/json/books.json")).get("items");
-
             } else {
                 items = mapper.readTree(new File(dataSource)).get("items");
             }
+
             if (items.isArray()) {
                 for (final JsonNode item : items) {
                     Book book = mapper.treeToValue(item, Book.class);

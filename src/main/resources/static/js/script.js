@@ -3,7 +3,7 @@ $(document).ready(function () {
         getBooksFromJson(data);
     })
 
-    $.getJSON("http:///localhost:8080/books/categories", function (data) {
+    $.getJSON("http://localhost:8080/books/categories", function (data) {
         $.each(data, function (index, value) {
             $('#categories').append(new Option(value, value))
         });
