@@ -38,4 +38,25 @@ e.g. java -Ddatasource=books.json -jar library-0.0.1-SNAPSHOT.jar
   - Jackson
   - HTML, CSS, JavaScript(jQuery)
   
+  # 7. Examples
+  
+  Starting page, displayed all books.
+  
+  ![starting page](example/starting%20page.png)
+  
+  Category change
+  
+  ![categories](example/categories.gif)
+  
+  Book details on click
+  
+  ![book details](example/book%20details.gif)
+  
+  
+  
+  
+
+  
+  
+  
   
